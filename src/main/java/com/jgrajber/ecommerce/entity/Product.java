@@ -1,6 +1,7 @@
 package com.jgrajber.ecommerce.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "product")
 @Data
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -51,4 +53,14 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
 
+    public Product(String sku, String name, String description, String imageUrl, boolean active, int unitInStock, BigDecimal unitPrice, ProductCategory productCategory) {
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.unitPrice = unitPrice;
+        this.imageUrl = imageUrl;
+        this.active = active;
+        this.unitInStock = unitInStock;
+        this.category = productCategory;
+    }
 }

@@ -1,6 +1,7 @@
 package com.jgrajber.ecommerce.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Table(name = "product_category")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ProductCategory {
 
     @Id
@@ -22,4 +24,8 @@ public class ProductCategory {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private Set<Product> products;
+
+    public ProductCategory(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
