@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ecommerce-app
+  data:
+    rest:
+      base-path: /api
+
+server:
+  port: 8080
