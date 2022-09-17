@@ -29,6 +29,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+# Visual Studio Code
+.vscode/*
+
+# System files
 .DS_Store
