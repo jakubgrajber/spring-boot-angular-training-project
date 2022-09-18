@@ -42,8 +42,8 @@ public class Product {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "unit_in_stock")
-    private int unitInStock;
+    @Column(name = "units_in_stock")
+    private int unitsInStock;
 
     @Column(name = "date_created")
     @CreationTimestamp
@@ -53,14 +53,14 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime lastUpdated;
 
-    public Product(String sku, String name, String description, String imageUrl, boolean active, int unitInStock, BigDecimal unitPrice, ProductCategory productCategory) {
+    public Product(String sku, String name, String description, String imageUrl, boolean active, int unitsInStock, BigDecimal unitPrice, ProductCategory productCategory) {
         this.sku = sku;
         this.name = name;
         this.description = description;
         this.unitPrice = unitPrice;
         this.imageUrl = imageUrl;
         this.active = active;
-        this.unitInStock = unitInStock;
+        this.unitsInStock = unitsInStock;
         this.category = productCategory;
     }
 }

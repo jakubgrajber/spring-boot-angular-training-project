@@ -21,6 +21,8 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: jgrajber
+    volumes:
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
 
