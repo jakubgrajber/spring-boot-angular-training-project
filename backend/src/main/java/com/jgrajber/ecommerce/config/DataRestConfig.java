@@ -1,8 +1,10 @@
 package com.jgrajber.ecommerce.config;
 
 
+import com.jgrajber.ecommerce.entity.Country;
 import com.jgrajber.ecommerce.entity.Product;
 import com.jgrajber.ecommerce.entity.ProductCategory;
+import com.jgrajber.ecommerce.entity.State;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -27,17 +29,19 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
         HttpMethod[] unsupportedActions = {HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.POST};
 
-        config.getExposureConfiguration()
-                .forDomainType(Product.class)
-                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedActions)))
-                .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedActions)));
-
-        config.getExposureConfiguration()
-                .forDomainType(ProductCategory.class)
-                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedActions)))
-                .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedActions)));
+        disableHttpMethods(Product.class, config, unsupportedActions);
+        disableHttpMethods(ProductCategory.class, config, unsupportedActions);
+        disableHttpMethods(Country.class, config, unsupportedActions);
+        disableHttpMethods(State.class, config, unsupportedActions);
 
         exposeIds(config);
+    }
+
+    private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions) {
+        config.getExposureConfiguration()
+                .forDomainType(theClass)
+                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedActions)))
+                .withCollectionExposure(((metdata, httpMethods) -> httpMethods.disable(unsupportedActions)));
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
