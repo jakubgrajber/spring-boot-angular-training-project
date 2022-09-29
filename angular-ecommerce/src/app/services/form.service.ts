@@ -21,7 +21,7 @@ export class FormService {
     )
   }
 
-  getState(theCountryCode: string): Observable<State[]> {
+  getStates(theCountryCode: string): Observable<State[]> {
 
     const searchStateUrl = `${this.statesUrl}/search/findByCountryCode?code=${theCountryCode}`;
 
