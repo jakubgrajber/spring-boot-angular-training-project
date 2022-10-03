@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
+import { CartService } from 'src/app/services/cart.service';
 import { FormService } from 'src/app/services/form.service';
 import { CustomValidators } from 'src/app/validators/custom-validators';
 
@@ -25,14 +26,17 @@ export class CheckoutComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-    private formService: FormService) { }
+    private formService: FormService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
 
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-      firstName: new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhiteSpace]),
-        lastName:  new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhiteSpace]),
+        firstName: new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhiteSpace]),
+        lastName: new FormControl('', [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhiteSpace]),
         email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
@@ -84,19 +88,26 @@ export class CheckoutComponent implements OnInit {
     )
 
   }
+  reviewCartDetails() {
+    this.cartService.totalPrice.subscribe(data =>
+      this.totalPrice = data)
+
+    this.cartService.totalQuantity.subscribe(data =>
+      this.totalQuantity = data)
+  }
 
   onSubmit() {
     console.log("Handling the submit button")
     console.log(this.checkoutFormGroup.get('customer').value);
 
-    if(this.checkoutFormGroup.invalid) { 
+    if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
     }
   }
 
-  get firstName() { return this.checkoutFormGroup.get('customer.firstName');}
-  get lastName () { return this.checkoutFormGroup.get('customer.lastName');}
-  get email() { return this.checkoutFormGroup.get('customer.email');}
+  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  get email() { return this.checkoutFormGroup.get('customer.email'); }
 
   get shippingAddressStreet() { return this.checkoutFormGroup.get('shippingAddress.street'); }
   get shippingAddressCity() { return this.checkoutFormGroup.get('shippingAddress.city'); }
@@ -134,7 +145,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   handleMonthsAndYears() {
-    
+
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
 
     const currentYear: number = new Date().getFullYear();
@@ -142,8 +153,8 @@ export class CheckoutComponent implements OnInit {
 
     let startMonth: number;
 
-    if(currentYear === selectedYear) {
-      startMonth = new Date().getMonth() +1;
+    if (currentYear === selectedYear) {
+      startMonth = new Date().getMonth() + 1;
     }
     else {
       startMonth = 1;
@@ -158,7 +169,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getStates(formGroupName: string) {
-    
+
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
     const countryCode = formGroup.value.country.code;
@@ -168,7 +179,7 @@ export class CheckoutComponent implements OnInit {
     console.log(`${formGroupName} country name: ${countryName}`);
 
     this.formService.getStates(countryCode).subscribe(
-      data =>{
+      data => {
 
         if (formGroupName === 'shippingAddress') {
           this.shippingAddressStates = data;
@@ -182,6 +193,6 @@ export class CheckoutComponent implements OnInit {
     )
 
 
-    }
+  }
 
 }
