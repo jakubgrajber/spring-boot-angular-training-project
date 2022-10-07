@@ -35,7 +35,7 @@ export class LoginStatusComponent implements OnInit {
   }
 
   logout() {
-    this.oktaAuth.signOut;
+    this.oktaAuth.signOut();
   }
 
 }
