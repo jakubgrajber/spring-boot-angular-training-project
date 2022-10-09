@@ -1,10 +1,7 @@
 package com.jgrajber.ecommerce.config;
 
 
-import com.jgrajber.ecommerce.entity.Country;
-import com.jgrajber.ecommerce.entity.Product;
-import com.jgrajber.ecommerce.entity.ProductCategory;
-import com.jgrajber.ecommerce.entity.State;
+import com.jgrajber.ecommerce.entity.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +34,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, unsupportedActions);
         disableHttpMethods(Country.class, config, unsupportedActions);
         disableHttpMethods(State.class, config, unsupportedActions);
+        disableHttpMethods(Order.class, config, unsupportedActions);
 
         exposeIds(config);
 
