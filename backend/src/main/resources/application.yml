@@ -4,8 +4,12 @@ spring:
   data:
     rest:
       base-path: /api
+      detection-strategy: annotated
   jpa:
     hibernate:
       ddl-auto: none
 server:
   port: 8080
+
+allowed:
+  origins: http://localhost:4200
