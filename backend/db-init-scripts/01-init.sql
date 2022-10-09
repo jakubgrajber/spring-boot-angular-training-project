@@ -64,7 +64,7 @@ CREATE TABLE customer (
                           id bigint NOT NULL DEFAULT NEXTVAL ('customer_seq'),
                           first_name varchar(255) DEFAULT NULL,
                           last_name varchar(255) DEFAULT NULL,
-                          email varchar(255) DEFAULT NULL,
+                          email varchar(255) UNIQUE DEFAULT NULL,
                           PRIMARY KEY (id)
 )   ;
 ALTER SEQUENCE customer_seq RESTART WITH 1;
