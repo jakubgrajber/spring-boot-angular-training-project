@@ -13,3 +13,8 @@ server:
 
 allowed:
   origins: http://localhost:4200
+
+okta:
+  oauth2:
+    client-id: 0oa6rr0pm8HP3jrmy5d7
+    issuer: https://dev-96977370.okta.com/oauth2/default
