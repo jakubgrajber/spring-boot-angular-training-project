@@ -26,6 +26,8 @@ public class SecurityConfig {
 
         Okta.configureResourceServer401ResponseBody(http);
 
+        http.csrf().disable();
+
         return http.build();
     }
 }
