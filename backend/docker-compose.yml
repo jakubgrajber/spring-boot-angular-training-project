@@ -11,7 +11,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - 8080:8080
+      - 8443:8443
     depends_on:
       - db
   db:
