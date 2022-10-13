@@ -34,3 +34,6 @@ build/
 
 # System files
 .DS_Store
+
+# Config files
+secrets.yml

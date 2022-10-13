@@ -8,6 +8,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+  config:
+    import: secrets.yml
 server:
   port: 8443
   ssl:
